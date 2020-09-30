@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import SetName from "./Components/SetName";
+import Form from "./Components/Form";
+import TodoList from "./Components/TodoList";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [inputText, setInputText] =  useState("");
+
+
+
+    return (
+      <div className="App">
+          <header>
+            {/*<h1>Leon`s Todo List</h1>*/}
+              <SetName/>
+          </header>
+
+          {/*Отправляем функцию setInputText
+            как props к Form, где изменяем значение inputText
+          */}
+          <Form setInputText={setInputText}/>
+          <TodoList/>
+      </div>
+    );
 }
 
 export default App;
