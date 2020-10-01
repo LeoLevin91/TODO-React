@@ -1,17 +1,29 @@
 import React, {useState} from "react";
 
-const Form = ({setInputText}) => {
+const Form = ({inputText, todos, setTodos, setInputText}) => {
 
     const inputTextHandler = (e) => {
-        console.log(setInputText);
         setInputText(e.target.value);
+    }
+
+    const submitTodoHandler = (e) => {
+        e.preventDefault();
+        setTodos([
+            ...todos,
+            {
+                text: inputText,
+                complited: false,
+                id: todos.length + 1
+            }
+        ]);
+        setInputText("");
     }
 
 
     return (
         <form>
-            <input onChange={inputTextHandler} type="text" className="todo-input"/>
-            <button className="todo-button" type="submit">
+            <input value={inputText} onChange={inputTextHandler} type="text" className="todo-input"/>
+            <button onClick={submitTodoHandler} className="todo-button" type="submit">
                 Set
             </button>
             <div className="select">

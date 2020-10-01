@@ -7,21 +7,22 @@ import TodoList from "./Components/TodoList";
 function App() {
 
     const [inputText, setInputText] =  useState("");
+    const [todos, setTodos] = useState([]);
 
 
 
     return (
       <div className="App">
           <header>
-            {/*<h1>Leon`s Todo List</h1>*/}
-              <SetName/>
+            <h1>Leon`s Todo List</h1>
+            {/*  <SetName/>*/}
           </header>
 
           {/*Отправляем функцию setInputText
             как props к Form, где изменяем значение inputText
           */}
-          <Form setInputText={setInputText}/>
-          <TodoList/>
+          <Form inputText={inputText} todos={todos} setTodos={setTodos} setInputText={setInputText}/>
+          <TodoList todos={todos}/>
       </div>
     );
 }

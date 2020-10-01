@@ -135,3 +135,19 @@ select {
   cursor: pointer;
   pointer-events: none;
 }
+
+.check {
+  background-color: #6ac80d;
+  border: none;
+  cursor: pointer;
+}
+
+.trash {
+  background-color: #ba0909;
+  border: none;
+  cursor: pointer;
+}
+
+.todo {
+  margin-top: 10px;
+}
