@@ -4,7 +4,7 @@ import SetName from "./Components/SetName";
 import Form from "./Components/Form";
 import TodoList from "./Components/TodoList";
 
-function App() {
+function App(key) {
 
     const [inputText, setInputText] =  useState("");
     const [todos, setTodos] = useState([]);
@@ -28,10 +28,32 @@ function App() {
         }
     }
 
+    // Run once when the app start
+    useEffect(() => {
+        getLocalTodos();
+    }, []);
+
+
     useEffect(() => {
         filtedHandler();
+        saveLocalTodos();
     }, [todos,status]);
 
+
+    // Save to local storage
+    const saveLocalTodos = () => {
+        localStorage.setItem("todos", JSON.stringify(todos));
+    }
+
+    const getLocalTodos = () => {
+        if(localStorage.getItem('todos') === null) {
+            localStorage.getItem('todos', JSON.stringify([]))
+        } else {
+            let todoLocal = JSON.parse(localStorage.getItem('todos'));
+            setTodos(todoLocal);
+        }
+
+    }
 
     return (
       <div className="App">
