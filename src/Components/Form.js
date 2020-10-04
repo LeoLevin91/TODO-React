@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
-const Form = ({inputText, todos, setTodos, setInputText}) => {
+const Form = ({setStatus, inputText, todos, setTodos, setInputText}) => {
 
     const inputTextHandler = (e) => {
         setInputText(e.target.value);
@@ -13,10 +13,14 @@ const Form = ({inputText, todos, setTodos, setInputText}) => {
             {
                 text: inputText,
                 complited: false,
-                id: todos.length + 1
+                id: todos.length
             }
         ]);
         setInputText("");
+    }
+
+    const statusHandler = (e) => {
+        setStatus(e.target.value);
     }
 
 
@@ -27,7 +31,7 @@ const Form = ({inputText, todos, setTodos, setInputText}) => {
                 Set
             </button>
             <div className="select">
-                <select name="todos" className="filter-todo">
+                <select onChange={statusHandler} name="todos" className="filter-todo">
                     <option value="all">All</option>
                     <option value="completed">Completed</option>
                     <option value="uncompleted">Uncompleted</option>

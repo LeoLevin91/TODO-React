@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import SetName from "./Components/SetName";
 import Form from "./Components/Form";
@@ -8,7 +8,29 @@ function App() {
 
     const [inputText, setInputText] =  useState("");
     const [todos, setTodos] = useState([]);
+    const [status, setStatus] = useState("all");
+    const [filteredTodos, setFilteredTodos] = useState([]);
 
+    const filtedHandler = () => {
+        switch (status) {
+            case "completed":
+                console.log("Completed");
+                setFilteredTodos(todos.filter(todo => todo.complited === true));
+                break;
+            case "uncompleted":
+                console.log("Uncompleted");
+                setFilteredTodos(todos.filter(todo => todo.complited === false));
+                break;
+            default:
+                console.log("Default");
+                setFilteredTodos(todos);
+                break;
+        }
+    }
+
+    useEffect(() => {
+        filtedHandler();
+    }, [todos,status]);
 
 
     return (
@@ -18,11 +40,9 @@ function App() {
             {/*  <SetName/>*/}
           </header>
 
-          {/*Отправляем функцию setInputText
-            как props к Form, где изменяем значение inputText
-          */}
-          <Form inputText={inputText} todos={todos} setTodos={setTodos} setInputText={setInputText}/>
-          <TodoList todos={todos}/>
+
+          <Form setStatus={setStatus} inputText={inputText} todos={filteredTodos} setTodos={setTodos} setInputText={setInputText}/>
+          <TodoList setTodos={setTodos} todos={filteredTodos}/>
       </div>
     );
 }
